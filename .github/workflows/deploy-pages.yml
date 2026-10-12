@@ -1,0 +1,116 @@
+name: 构建并部署到 GitHub Pages
+
+# ============================================================
+# 这个工作流不会修改仓库里的任何现有源码。
+#
+# 背景：原项目是按「部署在根目录」的假设开发的，但 GitHub Pages 项目站
+# 的地址多一层子路径：https://<用户名>.github.io/<仓库名>/
+# 直接部署会白屏，原因有两处：
+#   1. 产物里资源是绝对根路径 /assets/xxx      -> 文件 404
+#   2. router/index.js 里 createWebHistory() 未传 base -> 路由全部匹配不上
+#
+# 这里的做法（补丁只作用于 CI 运行器里的 dist/，不写回仓库）：
+#   1. 优先从源码构建，构建时用 --base 覆盖资源前缀
+#   2. 若源码构建没成功，自动回退到仓库里已提交的 dist/，
+#      并把其中的 /assets/ 改写成 /zhitu-frontend/assets/
+#   3. 往 index.html 注入 <base href>：vue-router 的 createWebHistory()
+#      在未传 base 时会读取 <base> 标签，从而正确识别子路径
+#   4. 复制一份 404.html，刷新深层页面时由前端接管路由
+#
+# 仓库改名时，只需改下面的 PAGES_BASE。
+# ============================================================
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  PAGES_BASE: /zhitu-frontend/
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # 仓库里 package.json 与 package-lock.json 的版本范围不同步，
+      # npm ci 会直接报 Invalid: lock file's vite@6.4.3 does not satisfy
+      # vite@5.4.21 并退出，所以这里用宽容的 npm install。
+      # 本步骤即使失败也不影响发布：下一步会回退到已提交的 dist/。
+      - name: 从源码构建（失败则回退）
+        id: build
+        continue-on-error: true
+        run: |
+          npm install --no-audit --no-fund
+          npm run build -- --base=${{ env.PAGES_BASE }} --outDir dist_build --emptyOutDir
+
+      - name: 选定要发布的目录
+        run: |
+          set -e
+          if [ -f dist_build/index.html ]; then
+            echo "== 使用源码构建出来的产物 =="
+            rm -rf dist && mv dist_build dist
+          else
+            echo "::warning::源码构建未成功，回退到仓库里已提交的 dist/"
+            rm -rf dist_build
+            test -f dist/index.html || { echo "::error::仓库里也找不到 dist/index.html"; exit 1; }
+          fi
+
+      - name: 子路径补丁（只改 CI 里的 dist）
+        run: |
+          set -e
+
+          if grep -q "${PAGES_BASE}assets/" dist/index.html; then
+            echo "产物已带 ${PAGES_BASE} 前缀（源码构建），跳过路径改写"
+          else
+            echo "产物是根路径引用（回退模式），执行 /assets/ -> ${PAGES_BASE}assets/ 改写"
+            grep -rl --include='*.html' --include='*.js' --include='*.css' '/assets/' dist \
+              | xargs -r sed -i "s#/assets/#${PAGES_BASE}assets/#g"
+          fi
+
+          # vue-router 未传 base 时会读取 <base> 标签
+          sed -i "s#<head>#<head>\n    <base href=\"${PAGES_BASE}\">#" dist/index.html
+
+          # 刷新深层页面时 GitHub Pages 会返回 404，交给前端接管
+          cp dist/index.html dist/404.html
+          touch dist/.nojekyll
+
+          echo "----- 校验 -----"
+          grep -q "base href=\"${PAGES_BASE}\"" dist/index.html \
+            || { echo "::error::<base> 注入失败"; exit 1; }
+          grep -q "${PAGES_BASE}assets/" dist/index.html \
+            || { echo "::error::index.html 的资源前缀不正确"; exit 1; }
+          test -f dist/404.html || { echo "::error::404.html 未生成"; exit 1; }
+          echo "校验通过，产物如下："
+          grep -o "${PAGES_BASE}assets/[^\"]*" dist/index.html
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
