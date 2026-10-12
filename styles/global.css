@@ -1,0 +1,45 @@
+:root {
+  --rpx: 0.5px;
+}
+
+html, body, #app {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+view {
+  box-sizing: border-box;
+}
+
+image {
+  display: block;
+}
+
+button {
+  padding: 0;
+  margin: 0;
+}
+
+input {
+  outline: none;
+}
+
+@media screen and (max-width: 750px) {
+  :root {
+    --rpx: calc(100vw / 750);
+  }
+}
+
+@media screen and (min-width: 750px) {
+  :root {
+    --rpx: 1px;
+  }
+}

@@ -1,0 +1,19 @@
+
+.splash-container[data-v-b5d3b004] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #fff;
+}
+.app-logo[data-v-b5d3b004] {
+  width: 5.625rem;
+  height: 5.625rem;
+}
+.app-name[data-v-b5d3b004] {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 0.625rem;
+  color: #000;
+}

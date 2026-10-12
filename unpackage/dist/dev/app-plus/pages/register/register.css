@@ -1,0 +1,118 @@
+
+.register-page[data-v-bac4a35d] {
+  padding: 1.875rem 1.25rem;
+  background-color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.help-link[data-v-bac4a35d] {
+  align-self: flex-end;
+  font-size: 0.75rem;
+  color: #999;
+  margin-bottom: 0.625rem;
+}
+.page-title[data-v-bac4a35d] {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 0.25rem;
+  align-self: flex-start;
+  padding-left: 0.9375rem;
+  margin-top: 0.625rem;
+}
+.page-subtitle[data-v-bac4a35d] {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.25rem;
+  align-self: flex-start;
+  padding-left: 0.9375rem;
+}
+.input-icon[data-v-bac4a35d] {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.625rem;
+}
+.input-group[data-v-bac4a35d] {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 15.625rem;
+  height: 2.75rem;
+  border: 0.0625rem solid #eee;
+  border-radius: 1.375rem;
+  padding: 0 0.9375rem;
+  margin-bottom: 0.625rem;
+  transition: border-color 0.3s ease;
+}
+
+/* 输入框聚焦时的高亮样式 */
+.input-group[data-v-bac4a35d]:focus-within {
+  border-color:#409eff;
+}
+.input-field[data-v-bac4a35d]:focus {
+  outline: none;
+}
+
+/* 年级选择器样式 */
+.picker[data-v-bac4a35d] {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.picker-text[data-v-bac4a35d] {
+  width: 100%;
+  font-size: 0.875rem;
+  color: #333;
+}
+.error-tip[data-v-bac4a35d] {
+  font-size: 0.75rem;
+  color: #f56c6c;
+  margin-bottom: 0.3125rem;
+  align-self: flex-start;
+  padding-left: 0.9375rem;
+}
+.agree-row[data-v-bac4a35d] {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 15.625rem;
+  margin: 0.625rem 0 0.9375rem;
+}
+.agree-check[data-v-bac4a35d] {
+  transform: scale(0.8);
+  margin-right: 0.46875rem;
+}
+.agree-text[data-v-bac4a35d] {
+  font-size: 0.75rem;
+  color: #666;
+  line-height: 1.5;
+}
+.agree-link[data-v-bac4a35d] {
+  color: #409eff;
+  text-decoration: underline;
+  padding: 0 0.125rem;
+  margin: 0 0.0625rem;
+  cursor: pointer;
+}
+.register-btn[data-v-bac4a35d] {
+  width: 100%;
+  max-width: 15.625rem;
+  height: 2.75rem;
+  line-height: 2.75rem;
+  background: linear-gradient(90deg, #409eff, #66b1ff);
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 1.375rem;
+  margin-bottom: 0.9375rem;
+}
+.link-row[data-v-bac4a35d] {
+  display: flex;
+  font-size: 0.75rem;
+  color: #666;
+}
+.link-text[data-v-bac4a35d] {
+  color: #409eff;
+  text-decoration: none;
+}

@@ -1,0 +1,219 @@
+{
+	  "easycom": {
+	    "autoscan": true,
+	    "custom": {
+	      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+	    }
+	  },
+	"pages": [ 
+		{
+			"path" : "pages/splash/splash",
+			"style": 
+			{
+			            "navigationBarTitleText": "启动页",
+			            "navigationStyle": "custom"  ,
+						"enablePullDownRefresh": false 
+			        }
+		},
+	
+		{
+		  "path": "pages/home/index",
+		  "style": {
+		    "navigationBarTitleText": "",
+			
+			"enablePullDownRefresh": true
+		  }
+		},
+		
+		{
+		  "path": "pages/correct/index",
+		  "style": {
+		    "navigationBarTitleText": "",
+			
+		    "enablePullDownRefresh": true
+		  }
+		},
+		{
+		  "path": "pages/profile/index",
+		  "style": {
+		    "navigationBarTitleText": "",
+			
+		    "enablePullDownRefresh": true
+		  }
+		},{
+			"path" : "pages/login/login",
+			"style" : 
+			{
+				"navigationBarTitleText" : "登录"
+			}
+		},
+		{
+			"path" : "pages/register/register",
+			"style" : 
+			{
+				"navigationBarTitleText" : "注册"
+			}
+		},
+		{
+			"path" : "pages/home/essay",
+			"style" : 
+			{
+				"navigationBarTitleText" : "范文详情",
+				"navigationStyle": "custom"  ,
+				"enablePullDownRefresh": true
+			}
+		},
+		
+		{
+			"path" : "pages/profile/settings",
+			"style" : 
+			{
+				"navigationBarTitleText" : "设置",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/correct/checkone",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/profile/edit",
+			"style" : 
+			{
+				"navigationBarTitleText" : "个人信息编辑页",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/correct/idiom_story",
+			"style" : 
+			{
+				"navigationBarTitleText" : "成语故事",
+				"navigationStyle" : "custom"
+				
+			}
+		},
+		{
+			"path" : "pages/guidance/guidance",
+			"style" : 
+			{
+				"navigationBarTitleText" : "引导页",
+				"navigationStyle" : "custom"
+			}
+		},
+		{
+			"path" : "pages/correct/correct_result",
+			"style" : 
+			{
+				"navigationBarTitleText" : "批改结果"
+			}
+		},
+		{
+			"path" : "pages/correct/special",
+			"style" : 
+			{
+				"navigationBarTitleText" : "专项练习"
+			}
+		},
+		{
+			"path" : "pages/profile/portrait",
+			"style" : 
+			{
+				"navigationBarTitleText" : "写作画像",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/profile/my_essay",
+			"style" : 
+			{
+				"navigationBarTitleText" : "我的作文",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/profile/favourites",
+			"style" : 
+			{
+				"navigationBarTitleText" : "收藏夹",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/profile/help",
+			"style" : 
+			{
+				"navigationBarTitleText" : "帮助中心",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/correct/photo",
+			"style" : 
+			{
+				"navigationBarTitleText" : "拍照批改",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/profile/variation",
+			"style" : 
+			{
+				"navigationBarTitleText" : "成长轨迹页",
+				"navigationStyle": "custom"
+			}
+		}
+		
+		
+	],
+	"globalStyle": {
+	    "navigationBarTextStyle": "black",
+	    "navigationBarTitleText": "uni-app",
+	    "navigationBarBackgroundColor": "#F8F8F8",
+        "backgroundColor": "#FFFFFF"
+	  },
+	"tabBar": {
+	  "color": "#999999",
+	  "selectedColor": "#10B981",
+	  "backgroundColor": "#ffffff",
+	  "borderStyle": "black",
+	  "list": [
+	    {
+	      "pagePath": "pages/home/index",
+	      "iconPath": "static/images/index-out.png",
+	      "selectedIconPath": "static/images/index-in.png",
+	      "text": "首页"
+	    },
+	    {
+	      "pagePath": "pages/correct/index",
+	      "iconPath": "static/images/correct-out.png",
+	      "selectedIconPath": "static/images/correct-in.png",
+	      "text": "批改"
+	    },
+	    {
+	      "pagePath": "pages/profile/index",
+	      "iconPath": "static/images/user-out.png",
+	      "selectedIconPath": "static/images/user.png",
+	      "text": "我的"
+	    }
+	  ]
+	},
+	
+	"uniIdRouter": {},
+	"condition" : { 
+		"current": 0, 
+		"list": [
+			{
+				"name": "", 
+				"path": "", 
+				"query": "" 
+			}
+		]
+	}
+}
+
+  
+  
